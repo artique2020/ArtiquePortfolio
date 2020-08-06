@@ -34,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'zkox%fdzbsb)iq1pw0khr5d8b5uwrjgmi4mach%o)!e6ob1lyl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['artique.pythonanywhere.com']
 
@@ -136,3 +136,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login'
+
+try:
+    from .local_settings import *
+except ImportError:
+    print("Looks like local_seetings.py is not available")
