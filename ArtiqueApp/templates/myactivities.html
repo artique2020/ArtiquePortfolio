@@ -1,0 +1,158 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+<!-- contact -->
+  <section class="container-fluid mt-5 p-5 customers">
+
+
+  
+        <div class="container">
+            <div class="container-fluid">
+                <!-- title -->
+                <div class="row">
+                    <div class="col text-center py-3">
+                       <!-- <h1 class="text-secondary font-italic common-title">Order <span class="text-secondary font-italic common-title"> History</span></h1> -->
+                        {% if CartH.count > 0 %}
+                            <h1 class="text-warning display-1">Order History</h1>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- end of title -->
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline4">
+
+                    {% for CartH in CartH %}
+
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="year">{{ CartH.id }}</span>
+                                <div class="inner-content">
+                                    <h1 class="title" >Order placed on {{CartH.Datecompleted|date:"D d M Y"}}  for AED {{ CartH.Amount }}</h1>
+                                        {{ CartH.Transact_dtl_set.all }}
+                                        {% for detail in CartH.transact_dtl_set.all %}
+               
+                                            <p class="description">
+                                                     {{ detail.Product.title }}  for AED {{ detail.Product.Current_Rate }} 
+                                            </p>    
+
+                                        {% endfor %} 
+                                    <p class="description">
+                                        <B>Status : {{ CartH.Status }}</B>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    
+                    {% endfor %}
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        
+
+<div class="container">
+            <div class="container-fluid">
+                <!-- title -->
+                <div class="row">
+                    <div class="col text-center py-3">
+                        <!--<h1 class="text-secondary font-italic common-title">Appointment <span class="text-secondary font-italic common-title"> History</span></h1> -->
+                        {% if Appnt.count > 0 %}
+                            <h1 class="text-warning display-1">Appointment History</h1>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- end of title -->
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline4">
+
+                    {% for Appnt in Appnt %}
+
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="year">{{Appnt.dt|date:"Y"}}</span>
+                                <div class="inner-content">
+                                    <h1 class="title" >Appointment Details:</h1>
+                                        <p class="description">
+                                                Date: {{Appnt.dt|date:"D d M Y"}}
+                                        </p>    
+                                        <p class="description">
+                                                Time: {{Appnt.visit_time}}
+                                        </p> 
+                                        <p class="description">
+                                                Service : {{Appnt.typ}}
+                                        </p> 
+                                        <p class="description">
+                                                Message: {{Appnt.msg}}
+                                        </p> 
+                                   
+                                </div>
+                            </a>
+                        </div>
+                    
+                    {% endfor %}
+                    
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <hr>
+        
+  </section>
+  <!-- end of contact -->
+
+
+
+
+
+
+
+      <!-- end of Team -->
+<!--footer-->
+
+  <footer>
+        <div class="container-fluid">
+          <div class="row">
+           
+            <div class="col text-center">
+                    <h1 class="text-warning font-weight-bold text-capitalize p-3">Artique Fashion Boutique LLC</h1>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shop No. 4, Bldg. No. 37, Behind Al Dhafra International School</h4>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shabia 9, Musaffah, Abu Dhabi, UAE</h4>
+                    <div class="py-2">
+                        <i class="fa fa-phone fa-2x " aria-hidden="true"></i>0562582868
+                        <a href="https://www.facebook.com/ArtiqueFashions"><i class="fab fa-facebook-square fa-2x text-primary mx-3"></i></a>                       
+                        
+                        <a href="https://www.instagram.com/artique_fashion"><i class="fab fa-instagram fa-2x text-danger mx-3"></i></a>
+                    </div>
+                    <p class="text-light py-4 m-0">&copy;Copyright 2018 - Made by CodeAndCreate</p>                
+            </div>
+          
+        </div>
+  </footer>
+<!--end of footer-->
+
+
+ 
+{% endblock%}
+
+
+
+
+
+
+
+ 
+        

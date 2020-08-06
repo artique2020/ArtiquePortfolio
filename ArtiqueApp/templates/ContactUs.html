@@ -1,0 +1,77 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+<!-- contact -->
+  <section class="contact p-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-5 pb-4">
+          <h3 class="display-4 mb-5 text-white">Contact Us</h3>
+          
+          <form method="POST" ">
+            {% csrf_token %}
+            <div class="form-group py-4">
+              <input type="text" id="name" name="name" class="form-control my-2 p-2 input" placeholder="Name">
+              <label for="name" class="label">Name</label>
+            </div>
+            <div class="form-group py-4">
+              <input type="email" id="emailid" name="emailid" class="form-control my-2 p-2 input" placeholder="Email Address">
+              <label for="emailid" class="label">Email Address</label>
+            </div>
+            <div class="form-group py-4 my-4">
+              <input id="send_info" name="send_info" type="checkbox" checked>
+              <label for="send_info" class="text-white">Send Announcements</label>
+            </div>
+            <button type="submit" class="btn btn-block p-2 font-weight-bold text-uppercase submit-button">Subscribe</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end of contact -->
+
+
+
+
+
+
+
+      <!-- end of Team -->
+<!--footer-->
+
+  <footer>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col text-left">
+                <!--Google map-->
+
+                  <div class="map-responsive">
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Artique+Fashion+Boutique" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                 </div>
+         
+
+                <!--Google Maps-->
+            </div>
+            <div class="col text-right">
+                    <h1 class="text-warning font-weight-bold text-capitalize p-3">Artique Fashion Boutique LLC</h1>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shop No. 4, Bldg. No. 37, Behind Al Dhafra International School</h4>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shabia 9, Musaffah, Abu Dhabi, UAE</h4>
+                    <div class="py-2">
+                        <i class="fa fa-phone fa-2x " aria-hidden="true"></i>0562582868
+                        <a href="https://www.facebook.com/ArtiqueFashions"><i class="fab fa-facebook-square fa-2x text-primary mx-3"></i></a>                       
+                        
+                        <a href="https://www.instagram.com/artique_fashion"><i class="fab fa-instagram fa-2x text-danger mx-3"></i></a>
+                    </div>
+                    <p class="text-light py-4 m-0">&copy;Copyright 2018 - Made by CodeAndCreate</p>                
+            </div>
+          </div>
+        </div>
+  </footer>
+<!--end of footer-->
+
+
+{% endblock%}

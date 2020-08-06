@@ -1,0 +1,145 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+
+<!-- contact -->
+
+   
+
+    <section class="p-sm-5 p-5 bg-light align-items-center">
+        <div class="container-fluid">
+            <!-- title -->
+            <div class="row">
+                <div class="col text-center py-3">
+                    <h1 class="text-secondary font-italic common-title">Our <span class="text-secondary font-italic common-title"> Collections</span></h1>
+                </div>
+            </div>
+            <!-- end of title -->
+        </div>
+    <form method="POST" action = "{% url 'srchourcollection' 1 %}">
+        {% csrf_token %}
+                                    
+        <div class="container-fluid">
+            <!-- title -->
+                	<div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
+                            <form class="card">
+                                <div class="card-body row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <i class="fas fa-search h4 text-body"></i>
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col">
+                                        <input class="form-control form-control-lg form-control-borderless" type="search" name="search" placeholder="Search based on keywords">
+                                    </div>
+                                    <!--end of col-->
+                                    
+                                        <div class="col-auto">
+                                            <button class="btn btn-lg btn-warning" type="submit">Searchs</button>
+                                        </div>
+                                  
+
+                                    <!--end of col-->
+                                </div>
+                            </form>
+                        </div>
+                        <!--end of col-->
+                    </div>
+        
+            <!-- end of title -->
+        </div>
+    </form>
+        
+        <div class="row">
+             {% for prd in products%}
+
+                 <div class="col-lg-3 col-sm-10 mx-auto mb-4 p-3        ">
+                   <div class="card card_shadow" style="width: 20rem; height: 36rem;">
+                        <div class="carousel slide" data-ride="carousel" id="carouselindicators{{ prd.id }}">
+                            <ol class="carousel-indicators">
+                            <li data-target="#carouselindicators{{ prd.id }}" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselindicators{{ prd.id }}" data-slide-to="1"></li>
+                            <li data-target="#carouselindicators{{ prd.id }}" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active text-center">
+                                    <img src="{{ prd.Main_img.url }}" width="450" height="480" class="card-img-bottom" > 
+                                </div>
+                                {% if prd.img1.url %}
+                                    <div class="carousel-item text-center">
+                                        <img src="{{ prd.img1.url }}" width="450" height="480" class="card-img-bottom" > 
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item text-center">
+                                    <img src="{{ prd.Main_img.url }}" width="450" height="480" class="card-img-bottom" > 
+                                    </div>
+                                {% endif %}
+
+                                {% if prd.img2 %}
+                                    <div class="carousel-item text-center">
+                                        <img src="{{ prd.img2.url }}" width="450" height="480" class="card-img-bottom" > 
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item text-center">
+                                    <img src="{{ prd.Main_img.url }}" width="450" height="480" class="card-img-bottom" > 
+                                    </div>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                        
+                       <form method="POST" action = "{% url 'mycart' prd.id %}">
+                        {% csrf_token %}
+                            <div class="card-body">
+                                <div class="card-title text-center">
+                                    <span class="text-secondary font-italic">Only for AED {{ prd.Current_Rate }} <button type="submit" class="btn btn-outline-danger">Add to Cart</button> </span>
+                                </div>
+                                <div class="card-subtitle">
+                                    <p class="text-primary text-center font-Bold"> {{ prd.description }}</p>
+                                </div>                             
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+
+            {% endfor %}
+
+
+
+
+
+        </div>
+
+      
+    </section>    
+     <!-- end of Projects -->
+
+<!--footer-->
+
+  <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="text-warning font-weight-bold text-capitalize p-3">Artique Fashion Boutique LLC</h1>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shop No. 4, Bldg. No. 37, Behind Al Dhafra International School</h4>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shabia 9, Musaffah, Abu Dhabi, UAE</h4>
+                    <div class="py-2">
+                        <i class="fa fa-phone fa-2x " aria-hidden="true"></i>0562582868
+                       <a href="https://www.facebook.com/ArtiqueFashions"><i class="fab fa-facebook-square fa-2x text-primary mx-3"></i></a>                       
+                        
+                        <a href="https://www.instagram.com/artique_fashion"><i class="fab fa-instagram fa-2x text-danger mx-3"></i></a>
+                    </div>
+                    <p class="text-light py-4 m-0">&copy;Copyright 2018 - Made by CodeAndCreate</p>
+                </div>
+            </div>
+        </div>
+     </footer>
+<!--end of footer-->
+
+
+{% endblock%}

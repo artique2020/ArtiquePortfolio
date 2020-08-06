@@ -1,0 +1,18 @@
+DJANGO ADMIN
+----------------
+abeesh
+shivani123
+
+Pythonanywhere
+-----------------
+Emailid:artiquefashions@gmail.com
+userid:artique
+password: dhanyasoni123
+
+
+GIT Hub
+-------------------------
+userid:artique2020
+emailid:artiquefashions@gmail.com
+password:dhanyasoni123
+Repository name: ArtiquePortfolio

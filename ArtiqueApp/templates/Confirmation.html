@@ -1,0 +1,109 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+
+<!-- contact -->
+ <section class="p-sm-5 bg-light py-3">
+      <div class="container">
+      <div>
+  <section>    
+   
+<!-- Cart Header -->
+ <section class="p-sm-5 bg-light py-3">
+      <div class="container">
+        <!-- title -->
+        
+        <div class="card card_shadow ">
+            <div class="row no-gutters">
+                <div class="col-md-4">                    
+                    <img class="img-responsive" src="{% static 'images/Artique.jpg' %}" alt="prewiew" width="120" height="100">
+                </div>
+            
+            <div class="col-md-8">
+                <div class="card-body ">
+                    <h3 class="card-title text-success">Your Order is successfully placed.</h3>
+                    <p class="card-text">Artique professional will contact you shortly and cordinate to deliver the goods.</p>        
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        
+      </div>
+    </section>
+
+
+  <!-- Cart Details -->
+
+<div class="container">
+   <div class="card card_shadow bg-light">
+            <div class="card-header text-left text-secondary">
+                <p align="left" class="text-success">     Order No. <strong>{{ CartId }}</strong> </p>                
+                <p align="left" class="text-success">
+                    Customer Name:<strong> {{ Cust }}</strong>
+                </p>                
+                <p align="left" class="text-success">
+                    Mobile No. <strong>{{ Mobileno }}</strong>
+                </p>                    
+            </div>
+            <div class="card-body text-left">
+                    <!-- PRODUCT -->
+                   
+                   
+                    {% for Cart in Cart %}
+                    
+                    <div class="row bg_light">
+                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                                <img class="img-responsive" src="{{ Cart.Product.Main_img.url }}" alt="prewiew" width="80" height="80">
+                        </div>
+                        <div class="col-12 text-sm-left col-sm-12 text-md-left col-md-6">
+                            <h5 class="product-name"><strong>{{ Cart.Product.title }}</strong></h5>
+                            <h5>
+                                <small>{{ Cart.Product.description }}</small>
+                            </h5>
+                        </div>
+                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                <h6><strong>{{ Cart.Product.Current_Rate }} </strong></h6>
+                              
+                            </div>                            
+                            
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- END PRODUCT -->
+
+                    {% endfor %}
+                    
+                
+            </div>
+            <div class="card-footer text-right">
+                        <div class="text-right text-success" style="margin: 10px">
+                           <h5> Total price: AED <b>{{ Totalprice.Current_Rate__sum }}</b> <h5>
+                        </div>
+                    
+                
+                <form method="POST" action = "{% url 'srchourcollection' 0 %}">
+                {% csrf_token %}
+                    <div class="row text-right" style="margin: 10px"> 
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            Shopping cart
+                    </div>    
+                     <div class="row text-right" style="margin: 10px">    
+                        <button type="submit" class="btn btn-outline-info btn-sm pull-right">Continue Shopping</button>
+                        
+                    </div>
+                </form>
+                
+                
+            </div>
+        </div>
+</div>
+
+
+
+
+{% endblock%}

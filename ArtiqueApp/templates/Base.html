@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="title icon" type="image/png" href="images/title-img.png">
+
+    <link rel="icon" type="image/jpg" href="{% static 'images/Artique.jpg' %}">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'js/jquery-3.4.1.min.js' %}" ></script>
+    <script src="{% static 'js/popper.js' %}" ></script>
+    <script src="{% static 'js/bootstrap.js' %}" ></script>
+    <script src="{% static 'js/script.js' %}" ></script>
+
+    <!--    fontawesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+  
+    <title>Artique Boutique Website</title>
+
+footer{
+	padding-top: 60px;
+	background: url(color_1.jpg) center center;
+	background-size: cover;
+	background-color: #ddd;
+	height: 360px;
+}
+
+  </head>
+  <body>
+   
+ 
+   <!--navbar-->>
+    <nav class="navbar navbar-expand-md navbar-light bg-warning fixed-top mb-5">
+
+        <div>
+                    <image src="{% static 'images/Artique.jpg' %}" width = "30%"> </image>
+        </div>
+
+      <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav"><span class="navbar-toggler-icon"></span></button>
+        
+        <div class="collapse navbar-collapse justify-content-between" id="nav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'artiquehome' %}">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle" data-toggle="dropdown" role="menu" aria-haspopup="true" data-target="#navToggleCommercial" href="#">Collections</a>
+                    <div class="dropdown-menu bg-warning" id="navToggleCommercial">
+                         {% for prd in prodtyp%}
+                        <a class="dropdown-item text-light"  href="{% url 'ourcollection' prd.id %}">{{ prd.name }}</a>                        
+                        {% endfor %}                       
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'appointment' %}">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'contactus' %}">Contact</a></li>
+                {% if user.is_authenticated %}
+                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'mycart' 0 %}">My Cart</a></li>
+                {% endif%}
+                {% if user.is_authenticated  %}
+                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'myactivities' %}">My Activities</a></li>
+                {% endif%}
+                {% if user.is_staff  %}
+                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'OrderList' %}">Order List</a></li>
+                {% endif%}
+            </ul>
+
+          <form class="form-inline ml-3">
+                
+                {% if user.is_authenticated %}
+                <div class="container-fluid">
+                  <div class="row">
+                    <h3 class="text-light">Logged in as: <span class="text-secondary">{{ user.username }}</span>
+                    <span>   </span>
+                      
+                    </h3>
+                  </div>                  
+                </div>
+                
+                {% endif%}
+          </form>
+        </div>
+    </nav>
+
+<!--end of navbar-->>
+
+{% block content %}{% endblock %}
+
+
+    
+    </body>
+</html>
+

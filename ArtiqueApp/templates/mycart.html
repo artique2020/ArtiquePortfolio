@@ -1,0 +1,103 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+
+<!-- contact -->
+
+   
+<!-- Cart Header -->
+ <section class="p-sm-5 p-2 bg-light">
+      <div class="container">
+        <!-- title -->
+        <div class="row">
+          <div class="col text-center py-3">
+            <h1 class="text-secondary font-italic common-title">My Order No. {{ CartId }} </h1>
+          </div>
+        </div>
+        <!-- end of title -->
+      </div>
+    </section>
+
+
+  <!-- Cart Details -->
+
+<div class="container">
+   <div class="card card_shadow shopping-cart">
+        <form method="POST" action = "{% url 'srchourcollection' 0 %}">
+            {% csrf_token %}
+            <div class="card-header bg-dark text-light">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Shipping cart
+                <button type="submit" class="btn btn-outline-info btn-sm pull-right">Continue Shopping</button>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+            <div class="card-body">
+                    <!-- PRODUCT -->
+                   
+                    {% for Cart in Cart %}
+                    
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                                <img class="img-responsive" src="{{ Cart.Product.Main_img.url }}" alt="prewiew" width="80" height="80">
+                        </div>
+                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                            <h4 class="product-name"><strong>{{ Cart.Product.title }}</strong></h4>
+                            <h4>
+                                <small>{{ Cart.Product.description }}</small>
+                            </h4>
+                        </div>
+                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                <h6><strong>{{ Cart.Product.Current_Rate }} </strong></h6>
+                              
+                            </div>
+                            
+                            <form method="POST" action = "{% url 'delcart' Cart.id %}">
+                            {% csrf_token %}
+                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                <button type="submit" class="btn btn-outline-danger ">
+                                    Delete
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- END PRODUCT -->
+
+                       {% endfor %}
+                    
+                
+            </div>
+            <div class="card-footer">
+            <form method="POST" action = "{% url 'confirmation' %}">
+                {% csrf_token %}
+                 <div class="col-md-5 col-sm-5 no-padding-left pull-left">
+                    <div class="row">
+                        <div class="col-5">
+                        Mobile No.
+                            <input type="text" class="form-control" name="mobile"  placeholder="Mobile No."> 
+                        </div>                        
+                    </div>
+                </div>
+                <div class="text-right" style="margin: 10px">
+                   
+                        <button type="submit" class="btn btn-success pull-right">Place Order</button>
+                   
+                    <div class="text-right" style="margin: 5px">
+                        Total price: <b>{{ Totalprice.Current_Rate__sum }}</b>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+</div>
+
+
+
+
+{% endblock%}

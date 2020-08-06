@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="title icon" type="image/png" href="images/title-img.png">
+
+    <link rel="icon" type="image/jpg" href="{% static 'images/Artique.jpg' %}">
+  
+  
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'js/jquery-3.4.1.min.js' %}" ></script>
+    <script src="{% static 'js/popper.js' %}" ></script>
+  <script src="{% static 'js/bootstrap.js' %}" ></script>
+    <script src="{% static 'js/script.js' %}" ></script>
+
+    <!--    fontawesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+  
+    <title>Artique Boutique Website</title>
+
+footer{
+	padding-top: 60px;
+	background: url(color_1.jpg) center center;
+	background-size: cover;
+	background-color: #ddd;
+	height: 360px;
+}
+
+  </head>
+  <body>
+   
+ 
+   <!--navbar-->>
+    <nav class="navbar navbar-expand-md navbar-light bg-warning fixed-top mb-5">
+
+        <div>
+                    <image src="{% static 'images/Artique.jpg' %}" width = "30%"> </image>
+        </div>
+
+      <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav"><span class="navbar-toggler-icon"></span></button>
+        
+        <div class="collapse navbar-collapse justify-content-between" id="nav">
+         <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'artiquehome' %}">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle" data-toggle="dropdown" data-target="#navToggleCommercial" href="#">Collections</a>
+                    <div class="dropdown-menu bg-warning" id="navToggleCommercial">
+                        {% for prd in prodtyp %}
+                        <a class="dropdown-item text-light"  href="{% url 'ourcollection' prd.id %}">{{ prd.name }}</a>                        
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'appointment' %}">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'contactus' %}">Contact</a></li>
+                {% if user.is_staff  %}
+                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'OrderList' %}">Order List</a></li>
+                {% endif%}
+
+            </ul>
+
+        
+        </div>
+    </nav>
+
+<!--end of navbar-->>
+
+  <header >
+    <div class="container-fluid banner">
+
+            <div class="row p-3">
+            </div>  
+             <div class="row justify-content-center align-items-center">
+                    <div class="row justify-content-center align-items-center">
+                    <h1><span class="text-warning font-italic common-title"> Be your own</span></h1>
+                    <h1><span class="text-warning font-italic common-title"> Label</span></h1>
+                    </div>
+                    <div class="row justify-content-center align-items-center">
+                       {% if user.is_authenticated %}
+                      <form action="{% url 'logoutuser' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                      </form>
+                    {% else %}
+                    
+                    <a href="{% url 'loginuser' %}" class="btn btn-success btn-lg px-4 m-3">Log In</a>
+                    <a href="{% url 'signupuser' %}" class="btn btn-danger btn-lg ">Sign Up</a>
+                      {% endif%}
+                    </div>
+             </div>
+            
+            <!--
+            <div class="row justify-content-center align-items-center p-1">
+                <div class="carousel slide" data-ride="carousel" id="car_ind_0">
+                            <ol class="carousel-indicators">
+                            <li data-target="#car_ind_0" data-slide-to="0" class="active"></li>
+                            <li data-target="#car_ind_0" data-slide-to="1"></li>
+                            <li data-target="#car_ind_0" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active text-center">
+                                    <img src="{% static 'images/Pic4.jpg' %}" width="600" height="400" class="card-img-bottom" > 
+                                </div>
+                                <div class="carousel-item text-center">
+                                    <img src="{% static 'images/Pic41.jpg' %}" width="600" height="400" class="card-img-bottom" > 
+                                </div>
+                                <div class="carousel-item text-center">
+                                    <img src="{% static 'images/Pic42.jpg' %}" width="600" height="400" class="card-img-bottom" > 
+                                </div>
+                            </div>
+                             <a class="carousel-control-prev" href="#car_ind_0" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#car_ind_0" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                </div>
+            </div>
+            -->
+    </div>
+
+</header>
+
+<!--banner    -->>
+<section>
+         
+     </section>
+<!--end of banner-->>
+
+ <!-- skills -->
+     <section class="bg-light p-4">
+        <div class="container-fluid">
+            <!-- title -->
+            <div class="row">
+                <div class="col text-center mb-3">
+                    <h1 class="text-warning display-2">Expertise</h1>
+                    <p class="lead text-secondary">Our expert team at Artique Fashion Boutique  uniquely creates versatile outfits that amalgamates traditional ethnic look with a global touch that helps our customers achieve a quaint yet chic look adding a modern and classy look incorporating all your iconic fashion goals.</p>
+                </div>
+            </div>
+            <!-- end of title -->
+            <div class="row text-center">
+                <div class="col-lg-4 col-sm-10 mx-auto mb-3">
+                    <image src="{% static 'images/TL2.jpg' %}" class="img-fluid rounded " > </image>
+                    <h1 class="text-secondary">Tailoring</h1>
+                    <p class="text-muted my-4">Tailor to perfection is our fashion mantra.Our bespoke services starting with a custom design, precise measurements collaborated with modern stitching and a tinge of master craftsmanship always results in stellar ensembles for our customers.</p>
+                    
+                </div>
+                <div class="col-lg-4 col-sm-10 mx-auto mb-3">
+                    <image src="{% static 'images/DSG1.jpeg' %}" class="img-fluid rounded" width=75% height=70% > </image>
+                    <h1 class="text-secondary">Designing</h1>
+                    <p class="text-muted my-4">Our expert and professional designers can help you transform all your creative fashion and stylish ideas that you have ever dreamt of into intricately crafted unique outfits as you create a sartorial elegant identity of your own.</p>
+                    
+                </div>
+                <div class="col-lg-4 col-sm-10 mx-auto mb-3">
+                    <image src="{% static 'images/EMB1.jpg' %}" class="img-fluid rounded" width=75% height=75% > </image>
+                    <h1 class="text-secondary">Embroidery</h1>
+                    <p class="text-muted my-4">We at Artique Fashion Boutique can weave magic into fabric using our hand embroidery techniques with a spectrum of fascinating coloured threads which can accentuate your wardrobe collections to the next level.</p>
+                    
+                </div>
+            </div>
+        </div>
+     </section>
+     <!-- end of skills -->
+
+     <!-- Projects -->
+
+    
+    <section class="p-sm-5 p-2 bg-light">
+        <div class="container-fluid">
+            <!-- title -->
+            <div class="row">
+                <div class="col text-center mb-3">
+                    <h1 class="text-warning display-2">Designer Collections</h1>
+                    <p>Our designs are influenced by the culture and social attiude of our neighbourhood. We create designs that out fuctional and comfortable, and use fabric locally
+available. We at Artique, give importance to the fit and finish of the dresses. We are mainly specialized in kurtis,lehangas, blouses, gowns and kids dresses.</p>
+                    <a class="btn btn-outline-warning" href="{% url 'srchourcollection' 0 %}">View More</a>
+                </div>
+            </div>
+            <div class="row">
+                {% for prd in products%}
+                <div class="col-lg-3 col-sm-10 mx-auto mb-4 rotate">
+                   <div class="card card_shadow book-card" style="width: 20rem; height: 36rem;">
+                        <img src="{{ prd.Main_img.url }}" width="450" height="480" class="card-img-bottom" > 
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3 class="text-center text-warning">{{ prd.title }}</h3>
+                            </div>
+                            <div class="card-subtitle">
+                                <p class="text-center text-muted"> {{ prd.description }}</p>
+                            </div>                             
+                        </div>
+                        <div class="back">
+                                <div class="back-content">
+                                    <h1 class="text-secondary font-italic common-title">Only for</h1>
+                                    <h3 class="mb-3">{{ prd.Current_Rate }}</h3>
+                                    <p><del>{{ prd.Previous_Rate }}</del></p>
+                                    <a href="#" class="btn btn-outline-danger px-4">Add to Cart</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                 {% endfor %}
+                
+            </div>
+
+        </div>
+    </section>    
+     <!-- end of Projects -->
+
+    <!--Customers-->
+    <section class="p-5 customers">
+     <div class="container-fluid">
+            <!-- title -->
+            <div class="row">
+                <div class="col text-center mb-3">
+                    <h1 class="text-warning display-3">Customer Feedback</h1>
+                     <p class="text-muted my-4">Some of the Feedbacks given by our esteemed customers</p>                    
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="carousel slide" data-ride="carousel" id="carouselExampleIndicators">
+                         <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active text-center">
+                            <blockquote class="blockquote text-white">
+                             <p class="mb-5">Artique has an amazing collection of clothes.... and a fabulous array of dress materials....  The tastefully handpicked collection and reasonable prices makes it one of the best boutiques in AbuDhabi.</p>
+                            </blockquote>
+                            <h5 class="text-light text-uppercase font-weight-bold mb-3">Indu Balakrishnan</h5>
+                            <ul class="list-inline mb-5">
+                                <li class="list-inline-item">
+                                    <i class="fas fa-star text-warning"></i>
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="fas fa-star text-warning"></i>
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="fas fa-star text-warning"></i>
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="fas fa-star text-warning"></i>
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="fas fa-star text-warning"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="carousel-item  text-center">
+                            <blockquote class="blockquote text-white">
+                            <p class="mb-5">The stitching is perfect, they make sure the customer is fully satisfied with the fit. They have a wide variety of dress materials to suit everyone’s taste. I’m a regular at Artique Boutique and looking forward to a long relationship!</p>
+                            </blockquote>
+                            <h5 class="text-light text-uppercase font-weight-bold mb-3">Afrah Sheriff</h5>
+                            <ul class="list-inline mb-5">
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            </ul>
+                        </div>
+                        <div class="carousel-item text-center">
+                            <blockquote class="blockquote text-white">
+                             <p class="mb-5">Material quality, design and good pricing. Excellent stitching and items gets ready on time</p>
+                            </blockquote>
+                            <h5 class="text-light text-uppercase font-weight-bold mb-3">Smitha Sajin</h5>
+                            <ul class="list-inline mb-5">
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-star text-warning"></i>
+                            </li>
+                            </ul>
+                        </div>
+                      </div>
+
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>            
+            </div>
+
+
+        </div>
+    </section>
+
+    <!--Customers-->
+
+   <!-- Team -->
+<section class="bg-secondary p-5">
+        <div class="container-fluid">
+            <!-- title -->
+            <div class="row">
+                <div class="col text-center mb-3">
+                    <h1 class="text-warning display-2">About Us</h1>
+                    <p class="text-muted my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, possimus beatae. Architecto vel, amet excepturi nisi quidem aliquid facilis in.</p>                    
+                </div>
+            </div>
+        </div>
+
+         <div class="row">
+                <div class="col-lg-4 col-sm-10 mx-auto mb-4">
+                   <div class="card card_shadow" style="width: 20rem; height: 30rem;">
+                        <img src="{% static 'images/DHN.jpg' %}" class="card-img-top" alt="Card image cap">
+                                  
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3 class="text-center text-muted">Dhanya Abeesh</h3>                                
+                            </div>                    
+                            <div class="card-subtitle">
+                                <h3 class="text-center text-warning">Managing Director</h3>                                
+                            </div>                    
+                            <div class="text-right">
+                                <a href="https://www.facebook.com/ArtiqueFashions"> <i class="fab fa-facebook fa-2x mx-2 text-primary"></i> </a>
+                                
+                                <a href="https://www.instagram.com/artique_fashion/"> <i class="fab fa-instagram fa-2x mx-2 text-danger"></i> </a>
+                            </div>                    
+                            
+                        </div>                    
+                   
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-10 mx-auto mb-4">
+                   <div class="card card_shadow" style="width: 20rem; height: 30rem;">
+                        <img src="{% static 'images/cust6.jpeg' %}" class="card-img-top" alt="Card image cap" >
+                                  
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3 class="text-center text-muted">Soni Manoj</h3>                                
+                            </div>                    
+                            <div class="card-subtitle">
+                                <h3 class="text-center text-warning">Partner</h3>                                
+                            </div>                    
+                            <div class="text-right">
+                                <a href="https://www.facebook.com/ArtiqueFashions"> <i class="fab fa-facebook fa-2x mx-2 text-primary"></i> </a>
+                                
+                                <a href="https://www.instagram.com/artique_fashion/"> <i class="fab fa-instagram fa-2x mx-2 text-danger"></i> </a>
+                            </div>                    
+                            
+                        </div>                    
+                   
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-10 mx-auto mb-4">
+                   <div class="card card_shadow" style="width: 20rem; height: 30rem;">
+                        <img src="{% static 'images/SHT.jpg' %}" class="card-img-top" alt="Card image cap">
+                                  
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3 class="text-center text-muted">Sheethal Francis</h3>                                
+                            </div>                    
+                            <div class="card-subtitle">
+                                <h3 class="text-center text-warning">Partner</h3>                                
+                            </div>                    
+                            <div class="text-right">
+                                <a href="https://www.facebook.com/ArtiqueFashions"> <i class="fab fa-facebook fa-2x mx-2 text-primary"></i> </a>
+                                
+                                <a href="https://www.instagram.com/artique_fashion/"> <i class="fab fa-instagram fa-2x mx-2 text-danger"></i> </a>
+                            </div>                    
+                            
+                        </div>                    
+                   
+                    </div>
+                </div>
+
+
+        </div>
+</section>
+
+      <!-- end of Team -->
+<!--footer-->
+
+  <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="text-warning font-weight-bold text-capitalize p-3">Artique Fashion Boutique LLC</h1>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shop No. 4, Bldg. No. 37, Behind Al Dhafra International School</h4>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shabia 9, Musaffah, Abu Dhabi, UAE</h4>
+                    <div class="py-2">
+                        <i class="fa fa-phone fa-2x " aria-hidden="true"></i>0562582868
+                        <a href="https://www.facebook.com/ArtiqueFashions"><i class="fab fa-facebook-square fa-2x text-primary mx-3"></i></a>                       
+                        
+                        <a href="https://www.instagram.com/artique_fashion"><i class="fab fa-instagram fa-2x text-danger mx-3"></i></a>
+                    </div>
+                    <p class="text-light py-4 m-0">&copy;Copyright 2018 - Made by A. Abeesh</p>
+                </div>
+            </div>
+        </div>
+     </footer>
+<!--end of footer-->
+
+
+

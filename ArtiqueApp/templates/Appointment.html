@@ -1,0 +1,173 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+<!-- contact -->
+  <section class="container-fluid mt-5 p-5 customers">
+
+   <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well-block">
+                        <div class="well-title text-warning">
+                            <h2>Book an Appointment</h2>
+                        </div>
+                        <form method="POST" action = "{% url 'confirmappoint' %}">
+                        {% csrf_token %}
+                            <!-- Form start -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Name</label>
+                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" value={{ ap_name }}>
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="emailid">Email</label>
+                                        <input id="emailid" name="emailid" type="text" placeholder="E-Mail" class="form-control input-md" value={{ ap_email }}>
+                                    </div>
+                                </div>
+
+
+                                <!-- Text input-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="dt">Preferred Date</label>
+                                        <input id="dt" name="dt" type="date" placeholder="Preferred Date" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <!-- Select Basic -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="visit_time">Preferred Time</label>
+                                        <select id="visit_time" name="visit_time" class="form-control">
+                                            <option value="10:00 to 10:30">10:00 to 10:30</option>
+                                            <option value="11:00 to 11:30">11:00 to 11:30</option>
+                                            <option value="12:00 to 12:30">12:00 to 12:30</option>
+                                            <option value="13:00 to 13:30">13:00 to 13:30</option>
+                                            <option value="18:00 to 18:30">18:00 to 18:30</option>
+                                            <option value="19:00 to 19:30">19:00 to 19:30</option>
+                                            <option value="20:00 to 20:30">20:00 to 20:30</option>
+                                            <option value="21:00 to 21:30">21:00 to 21:30</option>                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="mobile">Mobile No.</label>
+                                        <input id="mobile" name="mobile" type="text" placeholder="Mobile No." class="form-control input-md" value={{ ap_mob }}>
+                                    </div>
+                                </div>
+
+                                <!-- Select Basic -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="typ">Appointment For</label>
+                                        <select id="typ" name="typ" class="form-control">
+                                            <option value="Tailoring">Tailoring</option>
+                                            <option value="Designer Service">Designer Service</option>
+                                            <option value="Buy Artique Collection">Buy Artique Collection</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="msg">Comments</label>
+                                        <input id="msg" name="msg" type="textarea"  
+                                                        rows="5" 
+                                                        style="height:100px;"
+                                                        placeholder="Message" class="form-control input-md">
+                                      
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-success">Make An Appointment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well-block">
+                   
+                        <div class="feature-block">
+                            <div class="feature feature-blurb-text">
+                                <h4 class="feature-title text-warning">Book an Appointment</h4>
+                                <div class="feature-content">
+                                    <p class="text-muted">Book yourself an appointment online. Choose your date and time & our designer will be there to help you out.</p>
+                                </div>
+                            </div>
+                            <div class="feature feature-blurb-text">
+                                <h4 class="feature-title text-warning">Customization & Measurements</h4>
+                                <div class="feature-content">
+                                    <p class="text-muted">Our designer will help you to come up with look that suits you best and also she will show you fabric swatches if you need more fabric. Designer will take your measurements to ensure that you get perfect tailored fit. </p>
+                                </div>
+                            </div>
+                            <div class="feature feature-blurb-text">
+                                <h4 class="feature-title text-warning">Deliver at your Doorstep</h4>
+                                <div class="feature-content">
+                                    <p class="text-muted">All that's left is for you to complete the payment, hand over your fabric and leave the rest to us. We'll get working on your custom clothing and it will be at your door as per your delivery schedule.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  </section>
+  <!-- end of contact -->
+
+
+
+
+
+
+
+      <!-- end of Team -->
+<!--footer-->
+
+  <footer>
+        <div class="container-fluid">
+          <div class="row">
+           
+            <div class="col text-center">
+                    <h1 class="text-warning font-weight-bold text-capitalize p-3">Artique Fashion Boutique LLC</h1>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shop No. 4, Bldg. No. 37, Behind Al Dhafra International School</h4>
+                    <h4 class="text-secondary font-weight-light font-italic mb-3">Shabia 9, Musaffah, Abu Dhabi, UAE</h4>
+                    <div class="py-2">
+                        <i class="fa fa-phone fa-2x " aria-hidden="true"></i>0562582868
+                      <a href="https://www.facebook.com/ArtiqueFashions"><i class="fab fa-facebook-square fa-2x text-primary mx-3"></i></a>                       
+                        
+                        <a href="https://www.instagram.com/artique_fashion"><i class="fab fa-instagram fa-2x text-danger mx-3"></i></a>
+                    </div>
+                    <p class="text-light py-4 m-0">&copy;Copyright 2018 - Made by CodeAndCreate</p>                
+            </div>
+          
+        </div>
+  </footer>
+<!--end of footer-->
+
+
+ 
+{% endblock%}
+
+
+
+
+
+
+
+ 
+        

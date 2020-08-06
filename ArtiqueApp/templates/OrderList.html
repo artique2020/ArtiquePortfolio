@@ -1,0 +1,136 @@
+{% extends 'Base.html' %}
+
+{% block content%}
+
+{% load static %}
+
+<section class="container-fluid mt-5 p-5 ">
+
+<ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+        <a href="#prices2" class="nav-link active" data-toggle="tab"><h5>Orders</h5></a>
+    </li>
+    <li class="nav-item">
+        <a href="#features2" class="nav-link" data-toggle="tab"><h5>Appointments</h5></a>
+    </li>
+    
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="prices2">
+                
+              
+
+    {% for Cart in Cart %}
+        <div class="card mt-3 p-3">
+            <form method="POST" action = "{% url 'cancelled' Cart.id %}">
+                {% csrf_token %}
+                    {% if Cart.Status == 'InProgress' %}
+                        <div class="card-header bg-info text-light">
+                    {% endif%}
+
+                    {% if Cart.Status == 'Completed' %}
+                        <div class="card-header bg-success text-light">
+                    {% endif%}
+
+                    {% if Cart.Status == 'Cancelled' %}
+                        <div class="card-header bg-danger text-light">
+                    {% endif%}
+                    <div class="col-12 text-left">
+                    <h4>Order No. {{ Cart.id }} for {{ Cart.user }} </h4>
+                    <h4>Date     : {{Cart.Order_date|date:"D d M Y"}} </h4>
+                    <h4>Status   : {{ Cart.Status }}</h4>
+                    </div>
+                    {% if Cart.Status == 'InProgress' %}
+                        <div class="col-12 text-right">
+                            <button type="submit" class="btn btn-danger pull-right">Cancelled</button>                    
+                        </div>
+                    {% endif%}
+                </div>
+            </form>
+                <div class="card-body ">
+                        <!-- PRODUCT -->
+                    
+                       {% for detail in Cart.transact_dtl_set.all %}
+                        
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-2 text-center">
+                                    <img class="img-responsive" src="{{ detail.Product.Main_img.url }}" alt="prewiew" width="80" height="80">
+                            </div>
+                            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                <h4 class="product-name"><strong>{{ detail.Product.title }}</strong></h4>
+                                <h4>
+                                    <small>{{ detail.Product.description }}</small>
+                                </h4>
+                            </div>
+                            <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                    <h6><strong>{{ detail.Product.Current_Rate }} </strong></h6>
+                                
+                                </div>
+                                
+                                {% if Cart.Status != 'Completed' %}  
+                                    <form method="POST" action = "{% url 'delcart1' detail.id %}">
+                                    {% csrf_token %}
+                                    <div class="col-2 col-sm-2 col-md-2 text-right">
+                                        <button type="submit" class="btn btn-outline-danger ">
+                                            Delete
+                                        </button>
+                                    </div>
+                                    </form>
+                                {% endif%}
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END PRODUCT -->
+
+                        {% endfor %}
+                        
+                    
+                </div>
+                <div class="card-footer ">
+                <form method="POST" action = "{% url 'delivered' Cart.id %}">
+                    {% csrf_token %}
+                    <div class="col-md-5 col-sm-5 no-padding-left pull-left">
+                        <div class="row text-primary ">
+                            Mobile/Email : {{ Cart.Mobile }}   /    {{ user.last_name }}        / {{ user.email }}                  
+                        </div>
+                    </div>
+                    <div class="text-right" style="margin: 10px">
+                        {% if Cart.Status != 'Completed' %}    
+                            <button type="submit" class="btn btn-success pull-right">Delivered</button>
+                        {% endif%}
+                        <div class="text-right" style="margin: 5px">
+                            Total price: <b>{{ Cart.Amount }}</b>
+                        </div>
+                    </div>
+                </form>
+                </div>
+        </div>
+
+    {% endfor %}
+    </div>
+    <div class="tab-pane" id="features2">
+       {% for Appnt in Appn %}
+        <div class="card mt-3 p-3">
+            {% if Appnt.dt == today %}
+                <div class="card-header bg-info">
+            {% else %}
+                <div class="card-header bg-light">
+            {% endif %}
+                <div class="col-12 text-left">
+                    <h5>Date: {{Appnt.dt|date:"D d M Y"}} </h5>
+                    <h5>Time: {{Appnt.visit_time}}</h5>
+                    <h5>Name: {{Appnt.name}}</h5>
+                    <h5>Service Type: {{Appnt.typ}}</h5>
+                    <h5>Mobile: {{Appnt.mobile}}</h5>
+                    <h5>Email: {{Appnt.emailid}}</h5>
+                    <h5>Message: {{Appnt.msg}}</h5>   
+                           
+                </div>
+            </div>
+        </div>
+       {% endfor %}
+    </div>
+</section>
+{% endblock%}
