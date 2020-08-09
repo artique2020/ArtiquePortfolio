@@ -10,4 +10,4 @@ class AppointForm(ModelForm):
 class SubscribeForm(ModelForm):
      class Meta:
         model = subscriber
-        fields = ['name', 'emailid','send_info']        
+        fields = ['name', 'emailid','send_info','mobile']        

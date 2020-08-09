@@ -48,37 +48,37 @@ footer{
         
         <div class="collapse navbar-collapse justify-content-between" id="nav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'artiquehome' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-light  font-weight-bold px-3" href="{% url 'artiquehome' %}">Home</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle" data-toggle="dropdown" role="menu" aria-haspopup="true" data-target="#navToggleCommercial" href="#">Collections</a>
+                    <a class="nav-link text-light  font-weight-bold px-3 dropdown-toggle" data-toggle="dropdown" role="menu" aria-haspopup="true" data-target="#navToggleCommercial" href="#">Collections</a>
                     <div class="dropdown-menu bg-warning" id="navToggleCommercial">
                          {% for prd in prodtyp%}
                         <a class="dropdown-item text-light"  href="{% url 'ourcollection' prd.id %}">{{ prd.name }}</a>                        
                         {% endfor %}                       
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'appointment' %}">Appointment</a></li>
-                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'contactus' %}">Contact</a></li>
+                <li class="nav-item"><a class="nav-link text-light  font-weight-bold px-3" href="{% url 'appointment' %}">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link text-light  font-weight-bold px-3" href="{% url 'contactus' %}">Contact Us</a></li>
                 {% if user.is_authenticated %}
-                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'mycart' 0 %}">My Cart</a></li>
+                  <li class="nav-item"><a class="nav-link text-light  font-weight-bold px-3" href="{% url 'mycart' 0 %}">My Cart</a></li>
                 {% endif%}
                 {% if user.is_authenticated  %}
-                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'myactivities' %}">My Activities</a></li>
+                  <li class="nav-item"><a class="nav-link text-light  font-weight-bold px-3" href="{% url 'myactivities' %}">My Activities</a></li>
                 {% endif%}
                 {% if user.is_staff  %}
-                  <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'OrderList' %}">Order List</a></li>
+                  <li class="nav-item"><a class="nav-link text-light  font-weight-bold px-3" href="{% url 'OrderList' %}">Order List</a></li>
                 {% endif%}
             </ul>
 
-          <form class="form-inline ml-3">
+          <form class="form-inline ml-5">
                 
                 {% if user.is_authenticated %}
                 <div class="container-fluid">
                   <div class="row">
-                    <h3 class="text-light">Logged in as: <span class="text-secondary">{{ user.username }}</span>
+                    <h10 class="text-light font-weight-bold">Logged in as: <span class="text-secondary">{{ user.username }}</span>
                     <span>   </span>
                       
-                    </h3>
+                    </h10>
                   </div>                  
                 </div>
                 

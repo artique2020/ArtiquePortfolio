@@ -26,7 +26,7 @@
             <form method="POST" action = "{% url 'cancelled' Cart.id %}">
                 {% csrf_token %}
                     {% if Cart.Status == 'InProgress' %}
-                        <div class="card-header bg-info text-light">
+                        <div class="card-header bg-warning text-light">
                     {% endif%}
 
                     {% if Cart.Status == 'Completed' %}

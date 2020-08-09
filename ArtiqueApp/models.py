@@ -63,6 +63,7 @@ class subscriber(models.Model):
     name = models.CharField(max_length=500)
     emailid = models.CharField(max_length=500)
     send_info = models.BooleanField()
+    mobile = models.CharField(max_length=500,null= True)
     
     def __str__(self):
         return self.emailid
